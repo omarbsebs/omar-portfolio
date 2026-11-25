@@ -1,0 +1,162 @@
+/* ============================================================
+   INTERACTIONS.CSS — Mouse & Motion FX
+============================================================ */
+
+/* ── Custom Cursor ── */
+*, *::before, *::after { cursor: none !important; }
+
+#cursor-dot {
+  position: fixed; top: 0; left: 0; z-index: 99999;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #c9a84c;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: width 0.15s, height 0.15s, background 0.15s, opacity 0.15s;
+  mix-blend-mode: difference;
+}
+#cursor-ring {
+  position: fixed; top: 0; left: 0; z-index: 99998;
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 1.5px solid rgba(201,168,76,0.6);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: width 0.4s cubic-bezier(0.25,1,0.5,1),
+              height 0.4s cubic-bezier(0.25,1,0.5,1),
+              border-color 0.3s, opacity 0.3s;
+}
+body.cursor-hover #cursor-dot {
+  width: 12px; height: 12px; background: #fff;
+}
+body.cursor-hover #cursor-ring {
+  width: 56px; height: 56px;
+  border-color: rgba(201,168,76,0.9);
+  border-width: 1px;
+}
+body.cursor-click #cursor-dot {
+  width: 6px; height: 6px;
+}
+body.cursor-click #cursor-ring {
+  width: 28px; height: 28px;
+  border-color: #c9a84c;
+}
+body.cursor-hidden #cursor-dot,
+body.cursor-hidden #cursor-ring { opacity: 0; }
+
+/* ── Cursor trail ── */
+.cursor-trail {
+  position: fixed; border-radius: 50%; pointer-events: none;
+  z-index: 99990; transform: translate(-50%, -50%);
+  background: rgba(201,168,76,0.25);
+  transition: opacity 0.5s;
+}
+
+/* ── Hero floating orbs ── */
+.hero-orb {
+  position: absolute; border-radius: 50%;
+  pointer-events: none; z-index: 1;
+  filter: blur(60px);
+  will-change: transform;
+}
+.hero-orb-1 {
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(201,168,76,0.12), transparent 70%);
+  top: 10%; left: 5%;
+}
+.hero-orb-2 {
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(201,168,76,0.07), transparent 70%);
+  bottom: 20%; right: 10%;
+}
+.hero-orb-3 {
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(201,168,76,0.09), transparent 70%);
+  top: 50%; left: 55%;
+}
+
+/* ── Floating particles ── */
+.hero-particle {
+  position: absolute; border-radius: 50%;
+  pointer-events: none; z-index: 1;
+  background: rgba(201,168,76,0.4);
+  will-change: transform;
+  animation: floatParticle linear infinite;
+}
+@keyframes floatParticle {
+  0%   { transform: translateY(0) rotate(0deg); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 0.5; }
+  100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+}
+
+/* ── Spotlight on section ── */
+.spotlight-layer {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background: radial-gradient(600px circle at var(--x,50%) var(--y,50%),
+    rgba(201,168,76,0.04), transparent 60%);
+  transition: --x 0.1s, --y 0.1s;
+}
+
+/* ── 3D Tilt cards ── */
+.work-card, .skill-card, .service-card {
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform 0.08s linear, box-shadow 0.3s, border-color 0.3s;
+}
+.work-card:hover .work-thumb,
+.skill-card:hover,
+.service-card:hover {
+  box-shadow: 0 20px 60px rgba(201,168,76,0.15);
+}
+
+/* Tilt shine overlay */
+.tilt-shine {
+  position: absolute; inset: 0; border-radius: inherit;
+  background: radial-gradient(circle at var(--sx,50%) var(--sy,50%),
+    rgba(255,255,255,0.08), transparent 55%);
+  pointer-events: none; z-index: 10;
+  opacity: 0; transition: opacity 0.3s;
+}
+.work-card:hover .tilt-shine,
+.skill-card:hover .tilt-shine { opacity: 1; }
+
+/* ── Magnetic btn ── */
+.btn { will-change: transform; transition: transform 0.3s cubic-bezier(0.25,1,0.5,1), box-shadow 0.3s, background 0.3s; }
+
+/* ── Text glitch on hero name hover ── */
+.hero-title .line-2 {
+  display: inline-block;
+  transition: letter-spacing 0.4s;
+}
+.hero-title:hover .line-2 {
+  letter-spacing: 0.08em;
+}
+
+/* ── Ripple click effect ── */
+.ripple {
+  position: fixed; border-radius: 50%;
+  background: rgba(201,168,76,0.25);
+  pointer-events: none; z-index: 9999;
+  transform: scale(0); animation: rippleAnim 0.6s ease-out forwards;
+}
+@keyframes rippleAnim {
+  to { transform: scale(4); opacity: 0; }
+}
+
+/* ── Magnetic labels ── */
+.nav-links a { display: inline-block; will-change: transform; }
+
+/* ── Section border glow on enter ── */
+.skills, .work, .services, .contact {
+  position: relative;
+}
+
+/* ── Scroll progress bar ── */
+#scroll-progress {
+  position: fixed; top: 0; left: 0; height: 2px; z-index: 10001;
+  background: linear-gradient(90deg, #c9a84c, #e8c97a);
+  width: 0%; transition: width 0.1s linear;
+  box-shadow: 0 0 8px rgba(201,168,76,0.6);
+}
+
+/* ── About frame parallax ── */
+.about-frame { will-change: transform; transition: transform 0.08s linear; }

@@ -1,0 +1,194 @@
+
+/* ============================================================
+   LIGHTBOX + DRIVE THUMBNAIL — styles appended
+============================================================ */
+
+/* ── Drive Thumbnail in Card ── */
+.work-thumb {
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-3);
+  aspect-ratio: 4/3;
+}
+.work-card.featured .work-thumb { aspect-ratio: auto; height: 100%; }
+
+.drive-thumb {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+.work-card:hover .drive-thumb { transform: scale(1.06); }
+
+.drive-icon { font-size: 2.5rem; opacity: 0.3; }
+
+.work-actions {
+  margin-top: 0.8rem;
+}
+.open-drive-btn {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.4);
+  color: var(--gold); padding: 0.4rem 1rem; border-radius: 100px;
+  font-size: 0.75rem; cursor: pointer; transition: all 0.25s;
+}
+.open-drive-btn:hover {
+  background: var(--gold); color: #0a0a0a;
+}
+
+/* ── Lightbox ── */
+.lightbox {
+  position: fixed; inset: 0; z-index: 2000;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.lightbox.open {
+  opacity: 1; pointer-events: all;
+}
+
+.lb-backdrop {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,0.92);
+  backdrop-filter: blur(8px);
+}
+
+.lb-panel {
+  position: relative; z-index: 1;
+  background: var(--bg-card);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 16px;
+  width: min(90vw, 720px);
+  max-height: 90vh;
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  transform: scale(0.9) translateY(20px);
+  transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+  box-shadow: 0 40px 100px rgba(0,0,0,0.6);
+}
+.lightbox.open .lb-panel {
+  transform: scale(1) translateY(0);
+}
+
+.lb-close {
+  position: absolute; top: 1rem; right: 1rem; z-index: 10;
+  background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1);
+  color: var(--text); width: 36px; height: 36px; border-radius: 50%;
+  font-size: 0.85rem; cursor: pointer; display: flex;
+  align-items: center; justify-content: center;
+  transition: all 0.2s;
+}
+.lb-close:hover { background: rgba(201,168,76,0.3); border-color: var(--gold); color: var(--gold); }
+
+.lb-body {
+  flex: 1; overflow: hidden; min-height: 200px;
+  display: flex; align-items: center; justify-content: center;
+  background: #0a0a0a;
+  max-height: 60vh;
+}
+.lb-img {
+  width: 100%; height: 100%;
+  object-fit: contain; display: block;
+  max-height: 60vh;
+}
+.lb-no-thumb {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; gap: 0.8rem; padding: 3rem;
+  text-align: center;
+}
+.lb-no-icon { font-size: 3rem; opacity: 0.3; }
+.lb-no-thumb p { color: var(--text-muted); font-size: 0.9rem; }
+.lb-no-thumb small { color: var(--text-dim); font-size: 0.75rem; }
+
+.lb-footer {
+  padding: 1.5rem 2rem;
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  border-top: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+.lb-meta { flex: 1; }
+.lb-cat {
+  font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold); display: block; margin-bottom: 0.3rem;
+}
+.lb-title {
+  font-family: 'Playfair Display', serif; font-size: 1.2rem;
+}
+.lb-title-ar {
+  font-family: 'Cairo', sans-serif; font-size: 0.85rem;
+  color: var(--text-muted); margin: 0.1rem 0 0.5rem;
+}
+.lb-desc {
+  font-size: 0.85rem; color: var(--text-muted);
+}
+.lb-open-btn {
+  flex-shrink: 0; white-space: nowrap;
+  font-size: 0.85rem; padding: 0.7rem 1.4rem;
+  text-decoration: none;
+}
+.lb-no-link {
+  font-size: 0.75rem; color: var(--text-dim);
+  font-style: italic;
+}
+
+/* ── Count Badge & Orientation Tags ── */
+.count-badge {
+  position: absolute; top: 0.75rem; right: 0.75rem; z-index: 6;
+  background: rgba(10,10,10,0.85); border: 1px solid rgba(201,168,76,0.5);
+  color: var(--gold); padding: 0.28rem 0.7rem; border-radius: 100px;
+  font-size: 0.72rem; font-weight: 600; backdrop-filter: blur(6px);
+}
+.wl-tags {
+  display: flex; gap: 0.4rem; margin-top: 0.25rem; flex-wrap: wrap;
+}
+.wl-tags span {
+  font-size: 0.65rem; padding: 0.15rem 0.5rem; border-radius: 100px;
+  background: rgba(255,255,255,0.08); color: var(--text-muted);
+}
+
+/* Portrait vs Landscape card aspect ratios */
+.work-card.card-portrait .work-thumb { aspect-ratio: 9/14; }
+.work-card.card-landscape .work-thumb { aspect-ratio: 16/9; }
+
+/* Lightbox iframe & series switcher */
+.lb-iframe {
+  width: 100%; height: 55vh; border: none; display: block; background: #000;
+}
+.lb-series { margin-top: 0.8rem; }
+.lb-series-label {
+  display: block; font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.45rem;
+}
+.lb-series-list {
+  display: flex; flex-wrap: wrap; gap: 0.4rem; max-height: 110px; overflow-y: auto;
+}
+.lb-series-btn {
+  background: var(--bg-3); border: 1px solid var(--border); color: var(--text-muted);
+  padding: 0.3rem 0.75rem; border-radius: 100px; font-size: 0.72rem; cursor: pointer;
+  transition: all 0.2s;
+}
+.lb-series-btn:hover, .lb-series-btn.active {
+  background: var(--gold); color: #0a0a0a; border-color: var(--gold); font-weight: 600;
+}
+
+.lb-thumb-link {
+  position: relative; display: flex; align-items: center; justify-content: center;
+  width: 100%; height: 100%; text-decoration: none;
+}
+.lb-play-overlay {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.6rem;
+  background: rgba(0,0,0,0.35); transition: background 0.25s;
+}
+.lb-thumb-link:hover .lb-play-overlay { background: rgba(0,0,0,0.55); }
+.lb-play-circle {
+  width: 64px; height: 64px; border-radius: 50%;
+  background: rgba(201,168,76,0.92); color: #0a0a0a;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem; padding-left: 4px;
+  box-shadow: 0 10px 30px rgba(201,168,76,0.45);
+  transition: transform 0.25s;
+}
+.lb-thumb-link:hover .lb-play-circle { transform: scale(1.1); }
+.lb-play-text {
+  font-family: 'Cairo', sans-serif; font-size: 0.82rem; color: #fff;
+  background: rgba(0,0,0,0.65); padding: 0.25rem 0.9rem; border-radius: 100px;
+}
