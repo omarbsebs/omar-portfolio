@@ -413,7 +413,7 @@ section { padding: 7rem 0; }
 .contact-label { display: block; font-size: 0.75rem; color: var(--text-dim); letter-spacing: 0.1em; margin-bottom: 0.2rem; }
 .contact-val { font-size: 0.95rem; color: var(--text); text-decoration: none; }
 .contact-val:hover { color: var(--gold); }
-.social-links { display: flex; gap: 0.7rem; margin-top: 1rem; }
+.social-links { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-top: 1rem; }
 .social-btn {
   background: var(--bg-card); border: 1px solid var(--border);
   padding: 0.5rem 1.1rem; border-radius: 100px;
